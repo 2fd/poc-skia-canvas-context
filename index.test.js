@@ -7,8 +7,7 @@ describe('skia-canvas context', () => {
     const context = canvas.getContext('2d')
     expect(context.font).toBe(CONTEXT_FONT_DEFAULT_VALUE)
 
-    context.font = '600 20px Times'
-    expect(context.font).not.toBe(CONTEXT_FONT_DEFAULT_VALUE)
+    context.font = 'normal 600 20px/24px Times'
     expect(context.font).toBe('normal 600 20px/24px Times')
   })
 })

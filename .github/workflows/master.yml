@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: true
       matrix:
         version: [14, 16, 18]
         distribution: ["alpine", "slim"]
