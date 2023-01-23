@@ -1,12 +1,15 @@
 const { Canvas } = require('skia-canvas')
 
-const CONTEXT_FONT_DEFAULT_VALUE = '10px sans-serif'
 describe('skia-canvas context', () => {
   test('should be able to edit the context', () => {
+    // Create canvas  and context
     const canvas = new Canvas(100, 100)
     const context = canvas.getContext('2d')
-    expect(context.font).toBe(CONTEXT_FONT_DEFAULT_VALUE)
 
+    // Check default value
+    expect(context.font).toBe('10px sans-serif')
+
+    // Check update
     context.font = 'normal 600 20px/24px Times'
     expect(context.font).toBe('normal 600 20px/24px Times')
   })
