@@ -1,0 +1,12 @@
+FROM node:{{version}}-{{distribution}}
+
+RUN apk add --no-cache \
+  ttf-opensans
+
+WORKDIR /app
+
+COPY ./package.json         /app/package.json
+COPY ./package-lock.json    /app/package-lock.json
+COPY ./index.test.js        /app/index.test.js
+
+RUN npm ci

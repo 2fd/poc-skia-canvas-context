@@ -27,7 +27,28 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - uses: addnab/docker-run-action@v3
+      - name: Build Dockerfile
+        run:  "cat Dockerfile.template | sed 's/{{version}}/${{ matrix.version }}/' | sed 's/{{distribution}}/${{ matrix.distribution }}/' > Dockerfile"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and push
+        uses: docker/build-push-action@v3
         with:
-          image: node:${{ matrix.version }}-${{ matrix.distribution }}
-          run: echo "hello world"
+          tags: "skia-canvas:${{ matrix.version }}-${{ matrix.distribution }}"
+          push: false
+
+      - name: list images
+        run: docker images ls
+
+      - name: run test
+        uses: addnab/docker-run-action@v3
+        with:
+          image: "skia-canvas:${{ matrix.version }}-${{ matrix.distribution }}"
+          run: npm test
+
+      # - uses: addnab/docker-run-action@v3
+      #   with:
+      #     image: node:${{ matrix.version }}-${{ matrix.distribution }}
+      #     run: echo "hello world"
