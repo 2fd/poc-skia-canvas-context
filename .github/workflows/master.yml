@@ -27,9 +27,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: Build Dockerfile
-        run:  "cat Dockerfile.template | sed 's/{{version}}/${{ matrix.version }}/' | sed 's/{{distribution}}/${{ matrix.distribution }}/' > Dockerfile"
-
       - name: Print Dockerfile
         run: cat Dockerfile
 
@@ -37,7 +34,7 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       - name: Build
-        run: docker build . -t skia-canvas:${{ matrix.version }}-${{ matrix.distribution }}
+        run: docker build . -f Dockerfile.${{ matrix.version }}-${{ matrix.distribution }} -t skia-canvas:${{ matrix.version }}-${{ matrix.distribution }}
 
       - name: List images
         run: docker images ls
