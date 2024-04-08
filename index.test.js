@@ -10,7 +10,7 @@ describe('skia-canvas context', () => {
     expect(context.font).toBe('10px sans-serif')
 
     // Check update
-    context.font = 'normal 600 20px/24px Times'
-    expect(context.font).toBe('normal 600 20px/24px Times')
+    context.font = 'normal 600 20px/24px Noto'
+    expect(context.font).toBe('normal 600 20px/24px Noto')
   })
 })
