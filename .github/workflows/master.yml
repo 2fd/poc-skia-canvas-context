@@ -23,7 +23,7 @@ jobs:
       fail-fast: false
       matrix:
         version: [14, 16, 18, 20]
-        distribution: ["alpine", "alpine-font", "slim"]
+        distribution: ["alpine", "alpine-with-font", "slim"]
 
 
     # Steps represent a sequence of tasks that will be executed as part of the job
